@@ -4,15 +4,27 @@
 A Dockerized Cypress Image with an integrated light-weight desktop environment. 
 
 ### Usage
-**Linux:** 
+**Linux Command examples GUI (Developer mode in web browser):** 
 
 ```
-docker run -d -p 6901:6901 -p 5901:5901 -v $PWD/cypress:/src/cypress chronos86/visual_regression:20220213
+docker run --rm -p 6901:6901 -p 5901:5901 -v $PWD/cypress:/src/cypress chronos86/visual-regression:20220213 --name at
 ```
+
+**Linux Command examples NON GUI (Command line only - one time headless testing):**
+```
+docker run --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint2.sh chronos86/visual-regression:20220213
+```
+
+**Linux Command examples NON GUI (Command line only - headless testing +  bash):**
+```
+docker run -d --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint.sh chronos86/visual-regression:20220213
+docker exec --workdir /src -it at cypress run --headless --browser firefox
+```
+
 **Windows:**
 
 ```
-docker run -d -p 6901:6901 -p 5901:5901 -v ${PWD}/cypress:/src/cypress chronos86/visual_regression:20220213
+Use ${PWD} in Powershell
 ```
 
 You will be able to access the noVNC windows at [http://localhost:6901](http://localhost:6901) or use your VNC viewer with `localhost:5901`
@@ -30,7 +42,7 @@ The default username in the container is docker and you can use `sudo` without t
 
 DockerHub link of the images:
 
-- https://hub.docker.com/repository/docker/chronos86/visual_regression
+- https://hub.docker.com/repository/docker/chronos86/visual-regression
 
 ## Image Contents
 
