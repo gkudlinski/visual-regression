@@ -7,17 +7,17 @@ A Dockerized Cypress Image with an integrated light-weight desktop environment.
 **Linux Command examples GUI (Developer mode in web browser):** 
 
 ```
-docker run --rm -p 6901:6901 -p 5901:5901 -v $PWD/cypress:/src/cypress chronos86/visual-regression:20220213 --name at
+docker run --rm -p 6901:6901 -p 5901:5901 -v $PWD/cypress:/src/cypress chronos86/visual-regression:1.0.0 --name at
 ```
 
 **Linux Command examples NON GUI (Command line only - one time headless testing):**
 ```
-docker run --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint2.sh chronos86/visual-regression:20220213
+docker run --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint2.sh chronos86/visual-regression:1.0.0
 ```
 
 **Linux Command examples NON GUI (Command line only - headless testing +  bash):**
 ```
-docker run -d --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint.sh chronos86/visual-regression:20220213
+docker run -d --rm -v $PWD/cypress:/src/cypress -it --name at --entrypoint /src/entrypoint.sh chronos86/visual-regression:1.0.0
 docker exec --workdir /src -it at cypress run --headless --browser firefox
 ```
 

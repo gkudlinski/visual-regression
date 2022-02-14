@@ -1,4 +1,4 @@
- Visual Regression 20220213
+ Visual Regression 1.0.0
 
 ### Informations
 - Cypress version:  8.5.0
