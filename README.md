@@ -3,7 +3,17 @@
 
 A Dockerized Cypress Image with an integrated light-weight desktop environment. 
 
-### Usage
+### Usage Simple
+**Docker Compose GUI:**
+```
+docker-compose up
+```
+
+**Docker Compose Headless:**
+```
+docker-compose -f docker-compose-headless.yml up
+```
+### Usage Advanced
 **Linux Command examples GUI (Developer mode in web browser):** 
 
 ```
