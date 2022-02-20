@@ -19,11 +19,11 @@ build_docker:
     - docker info
     #- echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY} -u ${REGISTRY_USER} --password-stdin - *version_info
   script:
-    - echo 'start'
+    - echo 'start docker'
     #- docker run --rm -v $PWD/cypress:/src/cypress -i --name at --entrypoint='' chronos86/visual-regression:1.0.0 bash
     #- docker exec --workdir /src -it at cypress run --headless --browser firefox
     - docker run --rm -v $PWD/cypress:/src/cypress -i --name at --entrypoint /src/entrypoint3.sh chronos86/visual-regression:1.0.0 --exit-code-from cypress
-    - echo 'end'
+    - echo 'end docker'
     #- docker build .
     #  --tag ${CONTAINER_IMAGE}:$BUILD_VERSION
     #  --tag ${CONTAINER_IMAGE}:latest
