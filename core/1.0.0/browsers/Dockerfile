@@ -42,6 +42,7 @@ RUN echo  " node version:    $(node -v) \n" \
 COPY scripts/entrypoint.sh /src
 COPY scripts/entrypoint2.sh /src
 COPY scripts/entrypoint3.sh /src
+COPY scripts/entrypoint4.sh /src
 COPY scripts/cypress.json /src
 
 

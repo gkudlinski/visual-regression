@@ -9,4 +9,3 @@ function ctrl_c() {
 rm /tmp/.X1-lock 2> /dev/null &
 /opt/noVNC/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT &
 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -SecurityTypes None &
-cypress run --project ./src
