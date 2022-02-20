@@ -41,7 +41,7 @@ RUN echo  " node version:    $(node -v) \n" \
   "user:            $(whoami) \n"
 COPY scripts/entrypoint.sh /src
 COPY scripts/entrypoint2.sh /src
+COPY scripts/entrypoint3.sh /src
 COPY scripts/cypress.json /src
-#ENTRYPOINT ["/src/entrypoint.sh"]
 
 
