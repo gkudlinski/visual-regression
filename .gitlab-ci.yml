@@ -4,7 +4,7 @@ stages:
 
 test:
   image:
-    name: chronos86/visual-regression:1.0.0
+    name: $CI_REGISTRY_IMAGE:1.0.0
     entrypoint: [""]
   stage: test
   script:
