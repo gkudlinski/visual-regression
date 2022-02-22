@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
 
 test:
   image:
@@ -10,5 +11,22 @@ test:
     - echo "start"
     - cd /src
     - ./entrypoint4.sh
-    - cypress run --project /builds/gkudlinski/visual-regression
+    - cypress run --project $CI_PROJECT_DIR
     - echo "the end"
+
+build image:
+  stage: test
+  image: docker:20.10.10
+  services:
+    - docker:20.10.10-dind
+  when: manual
+  script:
+    - echo "start build image"
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+#    - cd $CI_PROJECT_DIR/core/1.0.0/base
+#    - docker build -t $CI_REGISTRY_IMAGE-base:1.0.0 .
+#    - docker push $CI_REGISTRY_IMAGE-base:1.0.0
+    - cd $CI_PROJECT_DIR/core/1.0.0/browsers
+    - docker build -t $CI_REGISTRY_IMAGE:1.0.0 .
+    - docker push $CI_REGISTRY_IMAGE:1.0.0
+    - echo "end build image"
