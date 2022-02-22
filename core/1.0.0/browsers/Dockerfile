@@ -29,17 +29,6 @@ RUN set -eux; \
   apt-get clean; \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN set -eux ;\
-    chmod -R 777 /src
-
-RUN groupadd -g 999 docker && useradd -u 999 -g docker -G sudo -m -s /bin/bash docker ; \
-    sed -i /etc/sudoers -re 's/^%sudo.*/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/g' ; \
-    sed -i /etc/sudoers -re 's/^root.*/root ALL=(ALL:ALL) NOPASSWD: ALL/g' ; \
-    sed -i /etc/sudoers -re 's/^#includedir.*/## **Removed the include directive** ##"/g' ; \
-    echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers ; \
-    echo "Customized the sudoers file for passwordless access to the docker user!" ; \
-    echo "docker user:";  su - docker -c id
-
 USER docker
 # versions of local tools
 RUN echo  " node version:    $(node -v) \n" \
@@ -50,9 +39,18 @@ RUN echo  " node version:    $(node -v) \n" \
   "Chrome version:  $(google-chrome --version) \n" \
   "Firefox version: $(firefox --version) \n" \
   "user:            $(whoami) \n"
+USER root
 COPY scripts/entrypoint.sh /src
 COPY scripts/entrypoint2.sh /src
 COPY scripts/entrypoint3.sh /src
 COPY scripts/entrypoint4.sh /src
 COPY scripts/cypress.json /src
+
+WORKDIR /src
+RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint2.sh
+RUN chmod +x entrypoint3.sh
+RUN chmod +x entrypoint4.sh
+
+USER docker
 
