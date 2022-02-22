@@ -10,6 +10,7 @@ test:
   script:
     - echo "start"
     - cd /src
+    - ls -la
     - ./entrypoint4.sh
     - cypress run --project $CI_PROJECT_DIR
     - echo "the end"
