@@ -1,4 +1,4 @@
-FROM chronos86/visual-regression-base:1.0.0
+FROM registry.gitlab.com/gkudlinski/visual-regression:1.0.0-base
 USER root
 # install Chrome browser
 ENV CHROME_VERSION 95.0.4638.54
