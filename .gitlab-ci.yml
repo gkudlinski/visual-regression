@@ -14,7 +14,7 @@ test:
     - ./entrypoint4.sh
     - cypress run --project $CI_PROJECT_DIR
     - echo "the end"
-build base image:
+build base 1.0.0 image:
   stage: test
   image: docker:20.10.10
   services:
@@ -27,7 +27,7 @@ build base image:
     - docker build -t $CI_REGISTRY_IMAGE:1.0.0-base .
     - docker push $CI_REGISTRY_IMAGE:1.0.0-base
     - echo "end build image"
-build image:
+build 1.0.0 image:
   stage: test
   image: docker:20.10.10
   services:
@@ -39,4 +39,30 @@ build image:
     - cd $CI_PROJECT_DIR/core/1.0.0/browsers
     - docker build -t $CI_REGISTRY_IMAGE:1.0.0 .
     - docker push $CI_REGISTRY_IMAGE:1.0.0
+    - echo "end build image"
+build base 1.1.0 image:
+  stage: test
+  image: docker:20.10.10
+  services:
+    - docker:20.10.10-dind
+  when: manual
+  script:
+    - echo "start build image"
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - cd $CI_PROJECT_DIR/core/1.1.0/base
+    - docker build -t $CI_REGISTRY_IMAGE:1.1.0-base .
+    - docker push $CI_REGISTRY_IMAGE:1.1.0-base
+    - echo "end build image"
+build 1.1.0 image:
+  stage: test
+  image: docker:20.10.10
+  services:
+    - docker:20.10.10-dind
+  when: manual
+  script:
+    - echo "start build image"
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - cd $CI_PROJECT_DIR/core/1.1.0/browsers
+    - docker build -t $CI_REGISTRY_IMAGE:1.1.0 .
+    - docker push $CI_REGISTRY_IMAGE:1.1.0
     - echo "end build image"

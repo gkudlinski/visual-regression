@@ -1,7 +1,7 @@
-FROM chronos86/visual-regression:1.0.0-base
+FROM chronos86/visual-regression:1.1.0-base
 USER root
 # install Chrome browser
-ENV CHROME_VERSION 95.0.4638.54
+ENV CHROME_VERSION 98.0.4758.102
 RUN wget -O /usr/src/google-chrome-stable_current_amd64.deb "http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}-1_amd64.deb" && \
   dpkg -i /usr/src/google-chrome-stable_current_amd64.deb; \
   apt-get install -f -y && \
@@ -11,7 +11,7 @@ RUN wget -O /usr/src/google-chrome-stable_current_amd64.deb "http://dl.google.co
   google-chrome --version
 
 # install Firefox browser
-ARG FIREFOX_VERSION=93.0
+ARG FIREFOX_VERSION=97.0
 RUN wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
   && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
   && rm /tmp/firefox.tar.bz2 \
